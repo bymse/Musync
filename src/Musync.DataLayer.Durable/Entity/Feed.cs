@@ -12,5 +12,7 @@ public class Feed
     [StringLength(100)]
     public string ExternalFeedId { get; set; } = null!;
     
+    public DateTimeOffset LastReadTime { get; set; }
+    
     public virtual ICollection<UserFeedLink> UserFeedLinks { get; set; }
 }
