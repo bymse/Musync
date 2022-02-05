@@ -1,26 +1,27 @@
 using Musync.DataLayer.Durable.Entity;
 using Musync.DataLayer.Durable.Repositories;
+using Musync.Utilities;
 
 namespace Musync.Reader.Models;
 
 public class FeedsProcessor
 {
     private readonly ILogger<FeedsProcessor> logger;
-    private readonly FeedReaderFactory feedReaderFactory;
+    private readonly IFeedReaderFactory feedReaderFactory;
     private readonly IFeedRepository feedRepository;
-    private readonly IConfiguration configuration;
+    private readonly IConfig config;
+    private readonly IDateTimeManager dateTimeManager;
 
     public FeedsProcessor(
         ILogger<FeedsProcessor> logger,
         IFeedRepository feedRepository,
-        IConfiguration configuration,
-        FeedReaderFactory feedReaderFactory
-    )
+        IFeedReaderFactory feedReaderFactory, IDateTimeManager dateTimeManager, IConfig config)
     {
         this.logger = logger;
         this.feedRepository = feedRepository;
-        this.configuration = configuration;
         this.feedReaderFactory = feedReaderFactory;
+        this.dateTimeManager = dateTimeManager;
+        this.config = config;
     }
 
     public async Task ProcessAsync(CancellationToken stoppingToken)
@@ -29,7 +30,7 @@ public class FeedsProcessor
 
         while (!stoppingToken.IsCancellationRequested)
         {
-            var pollingInterval = configuration.GetValue<TimeSpan>("Reader:PollingInterval");
+            var pollingInterval = config.GetValue<TimeSpan>("Reader:PollingInterval");
             var maxLastRead = DateTimeOffset.Now - pollingInterval;
             var feeds = feedRepository.GetFeeds(maxLastRead, maxFeedsCount);
             if (feeds.Count == 0)
@@ -47,7 +48,7 @@ public class FeedsProcessor
         try
         {
             await feedReaderFactory.GetReader(feed.FeedType).ReadAsync(feed);
-            feed.LastReadTime = DateTimeOffset.Now;
+            feed.LastReadTime = dateTimeManager.Now;
         }
         catch (Exception e)
         {
