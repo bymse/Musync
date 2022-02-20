@@ -6,7 +6,7 @@ public class FeedReadResult
 {
     public static readonly FeedReadResult Null = new();
     
-    public IReadOnlyList<MusicPostModel> MusicPostModels { get; init; }
-    public IReadOnlyList<SkippedPostModel> SkippedPostModels { get; init; }
-    public string LastPostId { get; init; }
+    public IReadOnlyList<MusicPostModel> MusicPostModels { get; init; } = null!;
+    public IReadOnlyList<SkippedPostModel> SkippedPostModels { get; init; } = null!;
+    public string LastPostId { get; init; } = null!;
 }

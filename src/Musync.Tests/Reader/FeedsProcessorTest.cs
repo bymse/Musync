@@ -80,7 +80,7 @@ public class FeedsProcessorTest
     {
         public Task<FeedReadResult?> ReadAsync(IFeed feed)
         {
-            throw new NotImplementedException();
+            return Task.FromResult(new FeedReadResult())!;
         }
     }
 

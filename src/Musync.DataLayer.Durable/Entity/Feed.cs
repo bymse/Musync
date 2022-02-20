@@ -6,6 +6,11 @@ namespace Musync.DataLayer.Durable.Entity;
 
 public class Feed : IFeed
 {
+    public Feed()
+    {
+        UserFeedLinks = new HashSet<UserFeedLink>();
+    }
+
     public int FeedId { get; set; }
     
     public FeedType FeedType { get; set; }
