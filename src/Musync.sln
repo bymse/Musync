@@ -16,6 +16,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Musync.DataLayer.Queue", "M
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Musync.Tests", "Musync.Tests\Musync.Tests.csproj", "{661345F5-3EF1-4E6C-86C7-1571555E1B40}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Musync.IntegrationTests", "Musync.IntegrationTests\Musync.IntegrationTests.csproj", "{459B2C67-6B5A-416F-822F-ACC6B742F702}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F0F6E9E1-49FE-401A-88E4-BF5CA4735822}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,5 +58,13 @@ Global
 		{661345F5-3EF1-4E6C-86C7-1571555E1B40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{661345F5-3EF1-4E6C-86C7-1571555E1B40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{661345F5-3EF1-4E6C-86C7-1571555E1B40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{459B2C67-6B5A-416F-822F-ACC6B742F702}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{459B2C67-6B5A-416F-822F-ACC6B742F702}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{459B2C67-6B5A-416F-822F-ACC6B742F702}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{459B2C67-6B5A-416F-822F-ACC6B742F702}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{459B2C67-6B5A-416F-822F-ACC6B742F702} = {F0F6E9E1-49FE-401A-88E4-BF5CA4735822}
+		{661345F5-3EF1-4E6C-86C7-1571555E1B40} = {F0F6E9E1-49FE-401A-88E4-BF5CA4735822}
 	EndGlobalSection
 EndGlobal

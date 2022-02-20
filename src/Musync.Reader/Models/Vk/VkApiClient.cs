@@ -20,22 +20,28 @@ public class VkApiClient : IVkApiClient
 
     public async Task<WallGetObject> GetWallAsync(string feedId)
     {
-        await EnsureAuthorized();
+        await EnsureAuthorizedAsync();
         var parameters = new WallGetParams
         {
             OwnerId = long.Parse(feedId),
             Filter = WallFilter.All,
-            Count = 10
+            Count = 10,
+            Extended = true
         };
 
         return await vkApi.Wall.GetAsync(parameters);
     }
 
-    private async Task EnsureAuthorized()
+    public async Task EnsureAuthorizedAsync()
     {
         await vkApi.AuthorizeAsync(new ApiAuthParams()
         {
             AccessToken = config.GetValue<string>("Reader:Vk:AccessToken"),
         });
+    }
+
+    public void Dispose()
+    {
+        vkApi.Dispose();
     }
 }

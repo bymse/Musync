@@ -13,15 +13,14 @@ public class VkMusicPostTextParserTest
     public static IEnumerable<TestCaseData> GetCases()
     {
         yield return new TestCaseData(
-            @"AJ Suede & Televangel - Metatron's Cube (2022, Fake Four)
+            @"Тестовый автор 2 — тестовое название 2
 
-some text
-more text
+Пост с плейлистом
 ")
         {
-            ExpectedResult = new MusicAlbum("AJ Suede & Televangel", "Metatron's Cube")
+            ExpectedResult = new MusicAlbum("Тестовый автор 2", "тестовое название 2")
         };
-        yield return new TestCaseData(@"Puritan Waste — You Can't Ignore The Enemy (2022, Unseen Force)
+        yield return new TestCaseData(@"Puritan Waste - You Can't Ignore The Enemy (2022, Unseen Force)
 harsh | industrial | power electronics | electro | no wave | rhythmic noise | minimal
 
 Новый кассетный дебют на известном американском лейбле, всегда")

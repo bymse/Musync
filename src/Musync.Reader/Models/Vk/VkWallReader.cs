@@ -1,3 +1,4 @@
+using Musync.Common.Utilities.Extensions;
 using Musync.DataLayer.Durable.Abstract;
 using Musync.DataLayer.Queue.Models;
 using VkNet.Model.Attachments;
@@ -16,13 +17,18 @@ public class VkWallReader : IFeedReader
     public async Task<FeedReadResult> ReadAsync(IFeed feed)
     {
         var wall = await vkApiClient.GetWallAsync(feed.ExternalFeedId);
+        var lastPostId = feed.LastPostId.IsNullOrEmpty()
+            ? (long?)null
+            : long.Parse(feed.LastPostId);
+        
         var posts = wall.WallPosts
+            .If(lastPostId.HasValue, e => e.Where(r => r.Id > lastPostId))
             .Select(e => ToPostModel(e, feed))
             .ToArray();
 
         return new FeedReadResult
         {
-            LastPostId = wall.WallPosts.LastOrDefault()?.Id,
+            LastPostId = wall.WallPosts.FirstOrDefault()?.Id,
             MusicPostModels = posts.OfType<MusicPostModel>().ToArray(),
             SkippedPostModels = posts.OfType<SkippedPostModel>().ToArray()
         };
@@ -46,7 +52,7 @@ public class VkWallReader : IFeedReader
             Author = album.Author,
             Title = album.Title,
             FeedId = feed.FeedId,
-            PostExternalId = feed.ExternalFeedId
+            PostExternalId = post.Id.ToString()!
         };
     }
 
@@ -65,6 +71,6 @@ public class VkWallReader : IFeedReader
             .Attachments
             .Where(e => e.Type == typeof(Link))
             .Select(e => (Link)e.Instance)
-            .Any(e => e.Description == "Плейлист");
+            .Any(e => e.Description == "Playlist");
     }
 }

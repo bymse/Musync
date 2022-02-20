@@ -17,10 +17,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Musync.FeedUpdater\Musync.FeedUpdater.csproj" />
       <ProjectReference Include="..\Musync.Reader\Musync.Reader.csproj" />
-      <ProjectReference Include="..\Musync.Site\Musync.Site.csproj" />
-      <ProjectReference Include="..\Musync.Synchronizer\Musync.Synchronizer.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Reader" />
     </ItemGroup>
 
 </Project>
