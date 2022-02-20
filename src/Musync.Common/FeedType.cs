@@ -1,4 +1,4 @@
-namespace Musync.DataLayer.Durable.Entity;
+namespace Musync.Common;
 
 public enum FeedType
 {

@@ -4,10 +4,12 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.Extensions.Logging;
 using Moq;
+using Musync.Common;
+using Musync.Common.Utilities;
+using Musync.DataLayer.Durable.Abstract;
 using Musync.DataLayer.Durable.Entity;
 using Musync.DataLayer.Durable.Repositories;
 using Musync.Reader.Models;
-using Musync.Utilities;
 using NUnit.Framework;
 
 namespace Musync.Tests.Reader;
@@ -76,17 +78,17 @@ public class FeedsProcessorTest
 
     public class SilentReader : IFeedReader
     {
-        public Task ReadAsync(Feed feed)
+        public Task<FeedReadResult> ReadAsync(IFeed feed)
         {
-            return Task.CompletedTask;
+            throw new NotImplementedException();
         }
     }
 
     public class ReaderWithException : IFeedReader
     {
-        public Task ReadAsync(Feed feed)
+        public Task<FeedReadResult> ReadAsync(IFeed feed)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 }

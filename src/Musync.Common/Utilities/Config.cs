@@ -1,6 +1,6 @@
 using Microsoft.Extensions.Configuration;
 
-namespace Musync.Common;
+namespace Musync.Common.Utilities;
 
 public class Config : IConfig
 {

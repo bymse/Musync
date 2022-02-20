@@ -1,4 +1,4 @@
-namespace Musync.Common;
+namespace Musync.Common.Utilities;
 
 public interface IDateTimeManager
 {
