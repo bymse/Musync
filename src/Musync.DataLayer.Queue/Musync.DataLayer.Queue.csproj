@@ -6,4 +6,8 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Musync.Common\Musync.Common.csproj" />
+    </ItemGroup>
+
 </Project>

@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Musync.Utilities", "Musync.Utilities\Musync.Utilities.csproj", "{AECB5C28-30B7-4D36-B714-12EE5350354E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Musync.Common", "Musync.Common\Musync.Common.csproj", "{AECB5C28-30B7-4D36-B714-12EE5350354E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Musync.Site", "Musync.Site\Musync.Site.csproj", "{2D207B24-513E-4F33-86A9-44FAD1D236F7}"
 EndProject

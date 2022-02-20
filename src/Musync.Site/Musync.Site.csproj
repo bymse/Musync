@@ -27,7 +27,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Musync.DataLayer.Durable\Musync.DataLayer.Durable.csproj" />
-      <ProjectReference Include="..\Musync.Utilities\Musync.Utilities.csproj" />
+      <ProjectReference Include="..\Musync.Common\Musync.Common.csproj" />
     </ItemGroup>
 
     <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

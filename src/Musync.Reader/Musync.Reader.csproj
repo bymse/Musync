@@ -10,11 +10,12 @@
 
     <ItemGroup>
         <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
+        <PackageReference Include="VkNet" Version="1.68.0" />
     </ItemGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\Musync.DataLayer.Durable\Musync.DataLayer.Durable.csproj" />
       <ProjectReference Include="..\Musync.DataLayer.Queue\Musync.DataLayer.Queue.csproj" />
-      <ProjectReference Include="..\Musync.Utilities\Musync.Utilities.csproj" />
+      <ProjectReference Include="..\Musync.Common\Musync.Common.csproj" />
     </ItemGroup>
 </Project>

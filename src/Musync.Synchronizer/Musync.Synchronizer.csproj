@@ -14,6 +14,6 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Musync.DataLayer.Queue\Musync.DataLayer.Queue.csproj" />
-      <ProjectReference Include="..\Musync.Utilities\Musync.Utilities.csproj" />
+      <ProjectReference Include="..\Musync.Common\Musync.Common.csproj" />
     </ItemGroup>
 </Project>

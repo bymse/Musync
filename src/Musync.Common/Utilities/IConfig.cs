@@ -1,4 +1,4 @@
-namespace Musync.Utilities;
+namespace Musync.Common;
 
 public interface IConfig
 {
