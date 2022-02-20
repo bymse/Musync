@@ -34,10 +34,13 @@ public class VkApiClient : IVkApiClient
 
     public async Task EnsureAuthorizedAsync()
     {
-        await vkApi.AuthorizeAsync(new ApiAuthParams()
+        if (!vkApi.IsAuthorized)
         {
-            AccessToken = config.GetValue<string>("Reader:Vk:AccessToken"),
-        });
+            await vkApi.AuthorizeAsync(new ApiAuthParams()
+            {
+                AccessToken = config.GetValue<string>("Reader:Vk:AccessToken"),
+            });
+        }
     }
 
     public void Dispose()

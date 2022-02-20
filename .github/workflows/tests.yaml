@@ -1,0 +1,51 @@
+name: Tests
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "6.0.x"
+
+      - name: Test
+        run: |
+          cd src
+          dotnet test "Musync.Tests" --logger trx --results-directory unit-tests
+
+      - name: Upload dotnet test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: unit-tests
+          path: src/unit-tests
+
+  integration-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup dotnet
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: "6.0.x"
+
+      - name: Test
+        run: |
+          cd src
+          dotnet test "Musync.IntegrationTests" --logger trx --results-directory integrations-tests
+        env:
+          MUSYNC_TESTS_VK_API_TOKEN: ${{ secrets.TESTS_VK_API_TOKEN }}
+
+      - name: Upload dotnet test results
+        uses: actions/upload-artifact@v2
+        with:
+          name: integrations-tests
+          path: src/integrations-tests
