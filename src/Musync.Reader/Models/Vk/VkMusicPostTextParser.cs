@@ -7,12 +7,12 @@ public record MusicAlbum(string Author, string Title);
 
 public static class VkMusicPostTextParser
 {
-    private static readonly Regex AuthorTitleRegex = new(@"(?<author>.*)[-—](?<title>.*)(?<year>\(.*\))");
+    private static readonly Regex AuthorTitleRegex = new(@"(?<author>.*)[-—](?<title>.*)(?<year>\(.*\))", RegexOptions.Compiled);
     
     public static MusicAlbum? ParseToAlbumInfo(string text)
     {
-        var firstLine = text.ReplaceLineEndings()
-            .Split(Environment.NewLine)
+        var firstLine = text?.ReplaceLineEndings()
+            .Split(Environment.NewLine, StringSplitOptions.RemoveEmptyEntries)
             .FirstOrDefault();
 
         if (firstLine.IsNullOrEmpty())

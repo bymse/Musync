@@ -38,6 +38,7 @@
 2. Save info to the durable storage
 3. Background service reads the "failed posts" queue
 4. Save info to the durable storage
+5. Store posts in separate table + UserPostLink for user's feed
 
 ### Database 
 
