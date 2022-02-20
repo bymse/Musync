@@ -14,7 +14,7 @@ public class VkWallReader : IFeedReader
         this.vkApiClient = vkApiClient;
     }
 
-    public async Task<FeedReadResult> ReadAsync(IFeed feed)
+    public async Task<FeedReadResult?> ReadAsync(IFeed feed)
     {
         var wall = await vkApiClient.GetWallAsync(feed.ExternalFeedId);
         var lastPostId = feed.LastPostId.IsNullOrEmpty()
@@ -26,9 +26,14 @@ public class VkWallReader : IFeedReader
             .Select(e => ToPostModel(e, feed))
             .ToArray();
 
+        if (!posts.Any())
+        {
+            return null;
+        }
+
         return new FeedReadResult
         {
-            LastPostId = wall.WallPosts.FirstOrDefault()?.Id,
+            LastPostId = wall.WallPosts.First().Id.ToString()!,
             MusicPostModels = posts.OfType<MusicPostModel>().ToArray(),
             SkippedPostModels = posts.OfType<SkippedPostModel>().ToArray()
         };

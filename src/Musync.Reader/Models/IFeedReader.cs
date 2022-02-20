@@ -4,5 +4,5 @@ namespace Musync.Reader.Models;
 
 public interface IFeedReader
 {
-    Task<FeedReadResult> ReadAsync(IFeed feed);
+    Task<FeedReadResult?> ReadAsync(IFeed feed);
 }

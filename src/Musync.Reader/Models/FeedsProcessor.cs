@@ -52,8 +52,14 @@ public class FeedsProcessor
         try
         {
             var result = await feedReaderFactory.GetReader(feed.FeedType).ReadAsync(feed);
+            if (result == null)
+            {
+                logger.LogInformation("Empty read result for {id} of type {type}", feed.FeedId, feed.FeedType);
+                return result;
+            }
+            
             feed.LastReadTime = dateTimeManager.Now;
-            feed.LastPostId = result.LastPostId.ToString();
+            feed.LastPostId = result.LastPostId;
             return result;
         }
         catch (Exception e)

@@ -6,6 +6,7 @@ using Moq;
 using Musync.Common.Utilities;
 using Musync.DataLayer.Durable.Entity;
 using Musync.DataLayer.Queue.Models;
+using Musync.Reader.Models;
 using Musync.Reader.Models.Vk;
 using NUnit.Framework;
 using VkNet;
@@ -38,9 +39,11 @@ public class VkWallReaderTest
 
         var result = await reader.ReadAsync(feed);
 
+        result.Should().NotBeNull();
+        
         using (new AssertionScope())
         {
-            result.LastPostId.Should().Be(3);
+            result!.LastPostId.Should().Be("3");
             result.SkippedPostModels.Should().BeEquivalentTo(new SkippedPostModel[]
             {
                 new(feed.FeedId, "3")

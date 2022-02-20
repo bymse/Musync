@@ -78,7 +78,7 @@ public class FeedsProcessorTest
 
     public class SilentReader : IFeedReader
     {
-        public Task<FeedReadResult> ReadAsync(IFeed feed)
+        public Task<FeedReadResult?> ReadAsync(IFeed feed)
         {
             throw new NotImplementedException();
         }
@@ -86,7 +86,7 @@ public class FeedsProcessorTest
 
     public class ReaderWithException : IFeedReader
     {
-        public Task<FeedReadResult> ReadAsync(IFeed feed)
+        public Task<FeedReadResult?> ReadAsync(IFeed feed)
         {
             throw new NotImplementedException();
         }
