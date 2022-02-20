@@ -1,8 +1,8 @@
-using Musync.DataLayer.Durable.Entity;
+using Musync.DataLayer.Durable.Abstract;
 
 namespace Musync.Reader.Models;
 
 public interface IFeedReader
 {
-    Task ReadAsync(Feed feed);
+    Task<FeedReadResult> ReadAsync(IFeed feed);
 }
