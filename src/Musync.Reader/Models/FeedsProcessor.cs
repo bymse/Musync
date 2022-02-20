@@ -1,6 +1,7 @@
 using Musync.DataLayer.Durable.Entity;
 using Musync.DataLayer.Durable.Repositories;
-using Musync.Utilities;
+using Musync.Common;
+using Musync.Common.Utilities;
 
 namespace Musync.Reader.Models;
 
@@ -38,21 +39,27 @@ public class FeedsProcessor
                 break;
             }
 
-            await Task.WhenAll(feeds.Select(ProcessFeedAsync));
+            var results = (await Task.WhenAll(feeds.Select(ProcessFeedAsync)))
+                .Where(e => e != null)
+                .ToArray();
+            
             feedRepository.SaveChanges();
         }
     }
 
-    private async Task ProcessFeedAsync(Feed feed)
+    private async Task<FeedReadResult?> ProcessFeedAsync(Feed feed)
     {
         try
         {
-            await feedReaderFactory.GetReader(feed.FeedType).ReadAsync(feed);
+            var result = await feedReaderFactory.GetReader(feed.FeedType).ReadAsync(feed);
             feed.LastReadTime = dateTimeManager.Now;
+            feed.LastPostId = result.LastPostId.ToString();
+            return result;
         }
         catch (Exception e)
         {
             logger.LogError(e, "Failed to read Feed {id} of type {type}", feed.FeedId, feed.FeedType);
+            return null;
         }
     }
 }
